@@ -7,6 +7,6 @@ import { faArrowRightFromBracket } from '@fortawesome/free-solid-svg-icons';
   styleUrl: './header.component.scss'
 })
 export class HeaderComponent {
-  isAuth = true;
+  isAuth = false;
   logoutIcon = faArrowRightFromBracket;
 }
