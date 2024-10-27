@@ -11,6 +11,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { CategoriesComponent } from './components/categories/categories.component';
 import { TransactionsFormComponent } from './components/transactions-form/transactions-form.component';
 import { TransactionsTableComponent } from './components/transactions-table/transactions-table.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { TransactionsTableComponent } from './components/transactions-table/tran
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FontAwesomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]
