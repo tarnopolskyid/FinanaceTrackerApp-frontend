@@ -26,7 +26,7 @@ export class CategoryService {
       .subscribe((newCategory: ICategory) => {
         this.categoriesSignal.update((categories) =>
           [...categories, newCategory])
-        this.toastr.success('Created')
+        this.toastr.success('Category created')
       })
   }
 
@@ -36,7 +36,7 @@ export class CategoryService {
         this.categoriesSignal.update((categories) =>
           categories.filter((category) => category.id !== id)
         )
-        this.toastr.warning('Deleted')
+        this.toastr.warning('Category deleted')
       })
   }
 
@@ -45,7 +45,7 @@ export class CategoryService {
       .subscribe(() => {
         this.categoriesSignal.update((categories) =>
           categories.map(it => it.id === id ? {...it, title} : it));
-          this.toastr.success('Updated');
+          this.toastr.success('Category updated');
       })
 
   }
