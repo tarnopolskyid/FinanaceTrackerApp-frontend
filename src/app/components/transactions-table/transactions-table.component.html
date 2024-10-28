@@ -1,1 +1,43 @@
-<p>transactions-table works!</p>
+<pagination-controls class="flex text-xs mt-4 justify-end" (pageChange)="currentPage = $event">
+
+</pagination-controls>
+
+<table class="w-full shadow rounded overflow-hidden mt-4">
+  <thead class="bg-blue-600 text-white">
+    <tr>
+      <td>#</td>
+      <td>Title</td>
+      <td>Amount</td>
+      <td>Category</td>
+      <td>Date</td>
+      <td class="text-right"></td>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let transaction of this.transactionService.transactionSig() | paginate: {itemsPerPage: 5, currentPage};
+                let i = index">
+      <td>
+        {{ i + 1 }}
+      </td>
+      <td>
+        {{ transaction.title | titlecase}}
+      </td>
+      <td [ngClass]="transaction.type == 'income' ? 'text-green-500' : 'text-red-500'">
+        {{ transaction.amount | currency: 'CZK':'symbol':'1.0-2'  }}
+      </td>
+      <td>
+        {{ transaction.category?.title ?? 'Other'}}
+      </td>
+      <td>
+        {{ transaction.createdAt | date }}
+      </td>
+      <td class="text-right">
+        <button (click)="delete(transaction.id)" class="text-red-600">
+          <fa-icon [icon]="removeIcon"/>
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+

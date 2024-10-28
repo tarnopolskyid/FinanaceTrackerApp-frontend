@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core'
 import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -17,6 +17,12 @@ import { TransactionsTableComponent } from './components/transactions-table/tran
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http'
 import { AuthInterceptor } from './ineterceptors/auth.interceptor'
+import { registerLocaleData } from '@angular/common'
+import localeCs from '@angular/common/locales/cs';
+import { NgxPaginationModule } from 'ngx-pagination'
+
+// Registrace české lokalizace
+registerLocaleData(localeCs, 'cs');
 
 @NgModule({
   declarations: [
@@ -38,13 +44,15 @@ import { AuthInterceptor } from './ineterceptors/auth.interceptor'
     HttpClientModule,
     BrowserAnimationsModule, // required animations module
     ToastrModule.forRoot(), // ToastrModule added
+    NgxPaginationModule
   ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
       multi: true
-    }
+    },
+    { provide: LOCALE_ID, useValue: 'cs' }
   ],
   bootstrap: [AppComponent]
 })

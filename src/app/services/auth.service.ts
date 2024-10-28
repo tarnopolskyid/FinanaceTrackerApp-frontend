@@ -23,10 +23,11 @@ export class AuthService {
 
   signUp(userData: IAuthUser) {
     return this.http.post(`${API_URL}/user`, userData)
-      .pipe(catchError(err => {
+      .pipe(
         tap(() => {
           this.login(userData);
         }),
+        catchError(err => {
         this.handleError(err);
           throw new Error(err.message);
       }))
