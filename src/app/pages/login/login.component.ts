@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms'
+import { AuthService } from '../../services/auth.service'
 
 @Component({
   selector: 'app-login',
@@ -9,7 +10,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms'
 export class LoginComponent {
   userData: FormGroup;
 
-  constructor() {
+  constructor(private readonly authService: AuthService) {
     this.userData = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [Validators.required, Validators.minLength(6)])
@@ -18,7 +19,7 @@ export class LoginComponent {
 
   onSubmit() {
     if (this.userData.valid){
-      console.log(this.userData.value)
+      this.authService.login(this.userData.value)
     } else {
       console.log("not valid")
     }
