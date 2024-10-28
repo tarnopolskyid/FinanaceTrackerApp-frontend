@@ -15,7 +15,8 @@ import { CategoriesComponent } from './components/categories/categories.componen
 import { TransactionsFormComponent } from './components/transactions-form/transactions-form.component';
 import { TransactionsTableComponent } from './components/transactions-table/transactions-table.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { HttpClientModule } from '@angular/common/http'
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http'
+import { AuthInterceptor } from './ineterceptors/auth.interceptor'
 
 @NgModule({
   declarations: [
@@ -38,7 +39,13 @@ import { HttpClientModule } from '@angular/common/http'
     BrowserAnimationsModule, // required animations module
     ToastrModule.forRoot(), // ToastrModule added
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

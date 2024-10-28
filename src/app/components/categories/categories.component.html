@@ -1,1 +1,37 @@
-<p>categories works!</p>
+<div class="p-4 shadow rounded grid">
+  <div>
+    <!--  Categories  -->
+    <div class="flex flex-wrap items-center gap-2 mb-5">
+      <div *ngFor="let category of this.categoryService.categoriesSignal()"
+           class="flex py-2 px-8 bg-blue-600 text-xs text-white relative">
+        <p>{{ category.title }}</p>
+
+        <button class="absolute left-2">
+          <fa-icon [icon]="editIcon" (click)="edit(category.id, category.title)"/>
+        </button>
+
+        <button class="absolute right-2">
+          <fa-icon [icon]="removeIocn" (click)="delete(category.id)"/>
+        </button>
+
+      </div>
+    </div>
+  </div>
+
+  <!--  Category form -->
+  <form [formGroup]="categoryForm" (ngSubmit)="onSubmit()">
+    <input formControlName="title" type="text" placeholder="Category name..."
+           class="input flex w-full" required/>
+
+    <button [disabled]="this.categoryForm.invalid"
+      type="submit" class="btn btn-green mt-2 w-full flex justify-center"
+      [ngClass]="{
+      'btn-green' : method === 'create',
+      'bg-amber-400' : method === 'update'
+      }">
+      <span *ngIf="method === 'create'">Create</span>
+      <span *ngIf="method === 'update'">Update</span>
+    </button>
+  </form>
+
+</div>
