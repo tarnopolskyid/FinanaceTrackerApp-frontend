@@ -17,6 +17,7 @@ export class TransactionsFormComponent {
       title: new FormControl('', Validators.required),
       amount: new FormControl('', [Validators.required]),
       type: new FormControl('', Validators.required),
+      comment: new FormControl(''),
       category: new FormControl('', Validators.required),
     })
   }

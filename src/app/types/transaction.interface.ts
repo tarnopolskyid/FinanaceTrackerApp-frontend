@@ -7,6 +7,7 @@ export interface ITransaction {
   type: TransactionType
   createdAt: Date
   updatedAt: Date
+  comment: string
   category?: ICategory | null
 }
 
@@ -14,6 +15,7 @@ export interface ITransactionData {
   title: string
   amount: number
   type: TransactionType
+  comment: string
   category: number
 }
 
