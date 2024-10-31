@@ -1,0 +1,10 @@
+// Fixní šířka sloupce Comment
+.comment-column,
+.comment-column-content {
+  width: 30%;
+  max-width: 30%;
+}
+
+.comment-column-content {
+  white-space: normal;
+}

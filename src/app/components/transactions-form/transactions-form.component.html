@@ -1,15 +1,40 @@
 <form [formGroup]="transactionForm" (ngSubmit)="onSubmit()" class="grid gap-2">
+  <legend class="text-xl mb-3">New transaction</legend>
+
   <label class="grid gap-1">
     <span>Title</span>
     <input type="text" class="input" placeholder="Title..." required
            formControlName="title"/>
   </label>
 
+  <div *ngIf="transactionForm.controls['title'].invalid &&
+    (transactionForm.controls['title'].dirty || transactionForm.controls['title'].touched)"
+       class="text-red-500 text-sm mt-2">
+    <div *ngIf="transactionForm.controls['title'].hasError('required')">
+      Title should be not empty
+    </div>
+  </div>
+
   <label class="grid gap-1">
     <span>Amount</span>
     <input type="number" class="input" placeholder="Amount..." required
-           formControlName="amount"/>
+           formControlName="amount" inputmode="numeric"/>
   </label>
+
+  <div *ngIf="transactionForm.controls['amount'].invalid &&
+    (transactionForm.controls['amount'].dirty || transactionForm.controls['amount'].touched)"
+       class="text-red-500 text-sm mt-2">
+
+    <div *ngIf="transactionForm.controls['amount'].hasError('required')">
+      Amount should be not empty
+    </div>
+
+    <div *ngIf="transactionForm.controls['amount'].hasError('pattern') ||
+                transactionForm.controls['amount'].hasError('min')">
+      Price must be a positive number
+    </div>
+
+  </div>
 
   <label class="grid gap-1">
     <span>Category</span>
@@ -21,9 +46,17 @@
     </select>
   </label>
 
+  <div *ngIf="transactionForm.controls['category'].invalid &&
+    (transactionForm.controls['category'].dirty || transactionForm.controls['category'].touched)"
+       class="text-red-500 text-sm mt-2">
+    <div *ngIf="transactionForm.controls['category'].hasError('required')">
+      Category should be not empty
+    </div>
+  </div>
+
   <label class="grid gap-1">
     <span>Comment</span>
-    <input type="text" class="input" placeholder="Comment..." required
+    <input type="text" class="input" placeholder="Comment..."
            formControlName="comment"/>
   </label>
 
@@ -39,6 +72,14 @@
              formControlName="type" required>
       <span>Expense</span>
     </label>
+  </div>
+
+  <div *ngIf="transactionForm.controls['type'].invalid &&
+    (transactionForm.controls['type'].dirty || transactionForm.controls['type'].touched)"
+       class="text-red-500 text-sm mt-2">
+    <div *ngIf="transactionForm.controls['type'].hasError('required')">
+      Type should be not empty
+    </div>
   </div>
 
   <button [disabled]="this.transactionForm.invalid" type="submit" class="btn btn-green">

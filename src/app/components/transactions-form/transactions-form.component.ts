@@ -15,7 +15,11 @@ export class TransactionsFormComponent {
               public categoryService: CategoryService) {
     this.transactionForm = new FormGroup({
       title: new FormControl('', Validators.required),
-      amount: new FormControl('', [Validators.required]),
+      amount: new FormControl('', [
+        Validators.required,
+        Validators.pattern("^[0-9]*$"),
+        Validators.min(0)
+      ]),
       type: new FormControl('', Validators.required),
       comment: new FormControl(''),
       category: new FormControl('', Validators.required),

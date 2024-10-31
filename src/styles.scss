@@ -9,9 +9,17 @@
     @apply text-neutral-900;
   }
 
+  tbody tr:hover {
+    @apply bg-slate-700
+  }
+
   td {
     @apply px-4 py-2 text-sm;
   }
+  p-paginator {
+    @apply text-sm
+  }
+
 }
 
 @layer components {
@@ -33,6 +41,16 @@
   }
 }
 
-.ngx-pagination li a {
-  color: white;
+.p-paginator-first, .p-paginator-last{
+  display: none;
+}
+
+p-paginator .p-element {
+  margin: 5px;
+  padding: 5px;
+}
+
+.p-highlight {
+  background-color: rgb(37 99 235);
+  margin: 5px;
 }

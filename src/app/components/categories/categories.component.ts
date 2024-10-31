@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core'
 import { faRemove, faEdit } from '@fortawesome/free-solid-svg-icons'
 import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { CategoryService } from '../../services/category.service'
+import { TransactionService } from '../../services/transaction.service'
 
 @Component({
   selector: 'app-categories',
@@ -19,7 +20,8 @@ export class CategoriesComponent implements OnInit {
   title: string = '';
   method: 'create' | 'update' = 'create';
 
-  constructor(public categoryService: CategoryService) {
+  constructor(public categoryService: CategoryService,
+              public transactionService: TransactionService) {
     this.categoryForm = new FormGroup({
       title: new FormControl('', [Validators.required])
     })
@@ -42,6 +44,7 @@ export class CategoriesComponent implements OnInit {
 
   delete(id: number) {
     this.categoryService.delete(id);
+    this.transactionService.findAll();
   }
 
   update() {

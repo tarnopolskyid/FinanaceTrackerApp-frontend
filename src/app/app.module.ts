@@ -20,6 +20,7 @@ import { AuthInterceptor } from './ineterceptors/auth.interceptor'
 import { registerLocaleData } from '@angular/common'
 import localeCs from '@angular/common/locales/cs';
 import { NgxPaginationModule } from 'ngx-pagination'
+import { TableModule } from 'primeng/table';
 
 // Registrace české lokalizace
 registerLocaleData(localeCs, 'cs');
@@ -44,7 +45,8 @@ registerLocaleData(localeCs, 'cs');
     HttpClientModule,
     BrowserAnimationsModule, // required animations module
     ToastrModule.forRoot(), // ToastrModule added
-    NgxPaginationModule
+    NgxPaginationModule,
+    TableModule
   ],
   providers: [
     {
