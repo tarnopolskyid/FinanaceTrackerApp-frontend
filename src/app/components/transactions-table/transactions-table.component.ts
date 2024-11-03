@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core'
-import { faTrash } from '@fortawesome/free-solid-svg-icons'
+import { Component, EventEmitter, OnInit, Output } from '@angular/core'
+import { faTrash, faEdit } from '@fortawesome/free-solid-svg-icons'
 import { TransactionService } from '../../services/transaction.service'
+import { ITransaction, TransactionType } from '../../types/transaction.interface'
 
 @Component({
   selector: 'app-transactions-table',
@@ -9,6 +10,10 @@ import { TransactionService } from '../../services/transaction.service'
 })
 export class TransactionsTableComponent implements OnInit {
 
+  @Output()
+  editClicked = new EventEmitter<ITransaction>();
+
+  editIcon = faEdit;
   removeIcon = faTrash;
   currentPage = 1;
 
@@ -19,8 +24,11 @@ export class TransactionsTableComponent implements OnInit {
     this.transactionService.findAll()
   }
 
-  delete(id: number) {
+  protected delete(id: number) {
     this.transactionService.delete(id);
   }
 
+  protected onEditClick(transaction: ITransaction) {
+    this.editClicked.emit(transaction);
+  }
 }

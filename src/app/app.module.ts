@@ -21,6 +21,7 @@ import { registerLocaleData } from '@angular/common'
 import localeCs from '@angular/common/locales/cs';
 import { NgxPaginationModule } from 'ngx-pagination'
 import { TableModule } from 'primeng/table';
+import { RadioButtonModule } from 'primeng/radiobutton'
 
 // Registrace české lokalizace
 registerLocaleData(localeCs, 'cs');
@@ -46,7 +47,8 @@ registerLocaleData(localeCs, 'cs');
     BrowserAnimationsModule, // required animations module
     ToastrModule.forRoot(), // ToastrModule added
     NgxPaginationModule,
-    TableModule
+    TableModule,
+    RadioButtonModule,
   ],
   providers: [
     {

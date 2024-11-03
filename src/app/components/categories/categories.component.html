@@ -26,11 +26,11 @@
     <button [disabled]="this.categoryForm.invalid"
       type="submit" class="btn btn-green mt-2 w-full flex justify-center"
       [ngClass]="{
-      'btn-green' : method === 'create',
-      'bg-amber-400' : method === 'update'
+      'btn-green' : method === MethodEnum.CREATE,
+      'bg-amber-400' : method === MethodEnum.EDIT
       }">
-      <span *ngIf="method === 'create'">Create</span>
-      <span *ngIf="method === 'update'">Update</span>
+      <span *ngIf="method === MethodEnum.CREATE">Create</span>
+      <span *ngIf="method === MethodEnum.EDIT">Update</span>
     </button>
   </form>
 

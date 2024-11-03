@@ -1,5 +1,12 @@
 <form [formGroup]="transactionForm" (ngSubmit)="onSubmit()" class="grid gap-2">
-  <legend class="text-xl mb-3">New transaction</legend>
+
+  <legend *ngIf="method == MethodEnum.EDIT" class="text-xl mb-3">
+    Edit transaction
+  </legend>
+
+  <legend *ngIf="method == MethodEnum.CREATE" class="text-xl mb-3">
+    New transaction
+  </legend>
 
   <label class="grid gap-1">
     <span>Title</span>
@@ -82,8 +89,14 @@
     </div>
   </div>
 
-  <button [disabled]="this.transactionForm.invalid" type="submit" class="btn btn-green">
-    Submit
+  <button [disabled]="this.transactionForm.invalid"
+          type="submit" class="btn mt-2 w-full flex justify-center"
+          [ngClass]="{
+      'btn-green' : method === MethodEnum.CREATE,
+      'bg-amber-400' : method === MethodEnum.EDIT
+      }">
+    <span *ngIf="method === MethodEnum.CREATE">Create</span>
+    <span *ngIf="method === MethodEnum.EDIT">Update</span>
   </button>
 
 </form>

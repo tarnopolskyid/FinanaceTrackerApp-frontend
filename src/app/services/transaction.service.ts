@@ -46,4 +46,29 @@ export class TransactionService {
         this.toastr.warning('Transaction deleted')
     })
   }
+
+  update(id: number, newTransaction: ITransactionData){
+    this.http.patch<ITransaction>(`transactions/transaction/${id}`, newTransaction)
+      .subscribe(updatedTransaction => {
+        const category = this.categoryService.categoriesSignal()
+          .find(ctg => ctg.id === updatedTransaction.category?.id);
+
+        this.transactionSig.update((transactions) =>
+          transactions.map(it => it.id === id
+            ? {...it,
+                title: newTransaction.title,
+                amount: newTransaction.amount,
+                comment: newTransaction.comment,
+                type: newTransaction.type,
+                category: category,
+                createdAt: it.createdAt,
+                updatedAt: new Date()
+              }
+            : it
+          ));
+        this.findAll();
+        this.toastr.success('Transaction updated');
+      })
+
+  }
 }

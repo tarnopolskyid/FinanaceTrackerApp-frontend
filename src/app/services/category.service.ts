@@ -38,6 +38,7 @@ export class CategoryService {
         )
         this.toastr.warning('Category deleted')
       })
+    this.findAll();
   }
 
   update(id: number, title: string){
@@ -47,6 +48,6 @@ export class CategoryService {
           categories.map(it => it.id === id ? {...it, title} : it));
           this.toastr.success('Category updated');
       })
-
+    this.findAll();
   }
 }

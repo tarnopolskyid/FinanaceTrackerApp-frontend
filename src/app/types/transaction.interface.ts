@@ -20,3 +20,8 @@ export interface ITransactionData {
 }
 
 export type TransactionType = 'income' | 'expense'
+
+export enum MethodEnum {
+  EDIT,
+  CREATE
+}

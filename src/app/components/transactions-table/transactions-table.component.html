@@ -36,12 +36,16 @@
         {{ transaction.category?.title ?? 'Other'}}
       </td>
       <td class="text-center">
-        {{ transaction.createdAt | date }}
+        {{ transaction.updatedAt == null ? (transaction.createdAt | date)
+        : (transaction.updatedAt | date) }}
       </td>
       <td>
         {{ transaction.comment }}
       </td>
       <td class="text-right">
+        <button (click)="onEditClick(transaction)" class="text-amber-400 mr-4">
+          <fa-icon [icon]="editIcon"/>
+        </button>
         <button (click)="delete(transaction.id)" class="text-red-600">
           <fa-icon [icon]="removeIcon"/>
         </button>
