@@ -1,10 +1,10 @@
 <form [formGroup]="transactionForm" (ngSubmit)="onSubmit()" class="grid gap-2">
 
-  <legend *ngIf="method == MethodEnum.EDIT" class="text-xl mb-3">
+  <legend *ngIf="method == MethodEnum.EDIT" class="text-2xl font-bold mb-3">
     Edit transaction
   </legend>
 
-  <legend *ngIf="method == MethodEnum.CREATE" class="text-xl mb-3">
+  <legend *ngIf="method == MethodEnum.CREATE" class="text-2xl font-bold mb-3">
     New transaction
   </legend>
 

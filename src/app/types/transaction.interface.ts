@@ -1,4 +1,5 @@
 import { ICategory } from './category.interface'
+import { IUser } from './user.interface'
 
 export interface ITransaction {
   id: number
@@ -9,6 +10,7 @@ export interface ITransaction {
   updatedAt: Date
   comment: string
   category?: ICategory | null
+  user: IUser
 }
 
 export interface ITransactionData {

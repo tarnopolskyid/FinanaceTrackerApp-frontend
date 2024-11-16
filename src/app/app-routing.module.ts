@@ -3,8 +3,9 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component'
 import { LoginComponent } from './pages/login/login.component'
 import { SignupComponent } from './pages/signup/signup.component'
-import { ProfileComponent } from './pages/profile/profile.component'
 import { authGuard } from './guards/auth.guard'
+import { ExchangeComponent } from './pages/exchange/exchange.component'
+import { GraphsComponent } from './pages/graphs/graphs.component'
 
 const routes: Routes = [
   {
@@ -14,11 +15,17 @@ const routes: Routes = [
     canActivate: [authGuard()]
   },
   {
-    path: 'profile',
-    component: ProfileComponent,
-    title: 'Profile',
-    canActivate: [authGuard()]
+    path: 'exchange',
+    component: ExchangeComponent,
+    title: 'Exchange',
+    canActivate: []
 
+  },
+  {
+    path: 'graphs',
+    component: GraphsComponent,
+    title: 'Graphs',
+    canActivate: [authGuard()]
   },
   {
     path: 'login',

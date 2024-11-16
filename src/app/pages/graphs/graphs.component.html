@@ -1,0 +1,20 @@
+<div class="flex flex-wrap justify-center gap-20">
+  <div class="text-center">
+    <label class="font-bold" for="totalExpense">Total expense</label>
+    <p-chart id="totalExpense" type="pie" [data]="pieChartDataExpense" [options]="pieChartOptions"></p-chart>
+  </div>
+  <div class="text-center">
+    <label class="font-bold" for="totalIncome">Total income</label>
+    <p-chart id="totalIncome" type="pie" [data]="pieChartDataIncome" [options]="pieChartOptions"></p-chart>
+  </div>
+</div>
+<div class="flex flex-wrap justify-center gap-20 mt-12">
+  <div class="text-center">
+    <label class="font-bold" for="byMonth">Stats by month</label>
+    <p-chart id="byMonth" type="bar" [data]="barChartData" [options]="barChartOptions"></p-chart>
+  </div>
+  <div class="text-center">
+    <label class="font-bold" for="transactionsLine">Transactions count by month</label>
+    <p-chart id="transactionsLine" type="line" [data]="lineChartData" [options]="lineChartOptions"></p-chart>
+  </div>
+</div>

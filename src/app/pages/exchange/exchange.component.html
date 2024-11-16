@@ -1,0 +1,38 @@
+<div class="max-w-md mx-auto p-4 bg-slate-700 shadow-md rounded-lg">
+  <h2 class="text-2xl font-bold mb-4 text-center">Currency Converter</h2>
+
+  <form [formGroup]="exchangeForm" (ngSubmit)="convertCurrency()" class="grid gap-4">
+    <div>
+      <label for="amount" class="block text-sm font-medium">Amount:</label>
+      <input type="number" id="amount" formControlName="amount" required
+             class="mt-1 block w-full px-3 py-2 border border-gray-300 text-slate-800
+             rounded-md shadow-sm focus:outline-none focus:ring-indigo-500
+             focus:border-indigo-500 sm:text-sm font-bold">
+    </div>
+
+    <div>
+      <label for="currencyFrom" class="block text-sm font-medium">Currency from:</label>
+      <select id="currencyFrom" formControlName="currencyFrom"
+              class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm
+               focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm
+               text-slate-800 font-bold">
+        <option *ngFor="let currency of currencies" [value]="currency">{{ currency }}</option>
+      </select>
+    </div>
+
+    <div>
+      <label for="currencyTo" class="block text-sm font-medium">Currency to:</label>
+      <select id="currencyTo" formControlName="currencyTo"
+              class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md
+              shadow-sm focus:outline-none focus:ring-indigo-500 text-slate-800
+               focus:border-indigo-500 sm:text-sm font-bold">
+        <option *ngFor="let currency of currencies" [value]="currency">{{ currency }}</option>
+      </select>
+    </div>
+
+  </form>
+
+  <div *ngIf="convertedAmount !== null" class="mt-4 p-4 bg-green-100 text-green-800 rounded-md">
+    <p class="text-lg font-semibold">Result: {{ convertedAmount }} {{ targetCurrency }}</p>
+  </div>
+</div>

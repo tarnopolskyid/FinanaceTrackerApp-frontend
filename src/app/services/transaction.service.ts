@@ -1,25 +1,29 @@
-import { Injectable, signal } from '@angular/core'
+import { Injectable, signal, WritableSignal } from '@angular/core'
 import { ITransaction, ITransactionData } from '../types/transaction.interface'
 import { HttpClient } from '@angular/common/http'
 import { ToastrService } from 'ngx-toastr'
 import { tap } from 'rxjs'
 import { CategoryService } from './category.service'
+import { format } from 'date-fns'
 
 @Injectable({
   providedIn: 'root'
 })
 export class TransactionService {
 
-  transactionSig = signal<ITransaction[]>([])
+  transactionSig: WritableSignal<ITransaction[]> = signal<ITransaction[]>([])
 
   constructor(private readonly http: HttpClient,
               private readonly toastr: ToastrService,
               private categoryService: CategoryService) {
+    this.findAll(); // Automatické načítání dat při inicializaci
   }
 
   findAll() {
     this.http.get<ITransaction[]>('transactions')
-      .subscribe(res => this.transactionSig.set(res))
+      .subscribe(res => {
+        this.transactionSig.set(res)
+      })
   }
 
   create(data: ITransactionData) {
@@ -70,5 +74,17 @@ export class TransactionService {
         this.toastr.success('Transaction updated');
       })
 
+  }
+
+  getTransactionsPerMonth() {
+    const transactions = this.transactionSig();
+    const transactionsPerMonth = transactions.reduce((acc, transaction) => {
+      const month = format(new Date(transaction.createdAt), 'yyyy-MM');
+      acc[month] = (acc[month] || 0) + 1;
+      return acc;
+    }, {} as Record<string, number>);
+    console.log(transactions)
+    console.log(transactionsPerMonth)
+    return transactionsPerMonth;
   }
 }

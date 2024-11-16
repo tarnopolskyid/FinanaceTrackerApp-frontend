@@ -8,7 +8,12 @@ export class AuthInterceptor implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler){
     const token = localStorage.getItem('token');
-    if (token) {
+    // Zkontroluje, zda je v požadavku hlavička no-api-prefix
+    if (req.headers.get('no-api-prefix')) {
+      req = req.clone({
+        headers: req.headers.delete('no-api-prefix'), // Odstrani hlavičku
+      });
+    } else if (token) {
       req = req.clone({
         setHeaders: {
           Authorization: `Bearer ${token}`,
