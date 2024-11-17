@@ -24,4 +24,11 @@ export class LoginComponent {
       console.log("not valid")
     }
   }
+
+  onCancel() {
+    this.userData.reset({
+      email: '',
+      password: ''
+    });
+  }
 }

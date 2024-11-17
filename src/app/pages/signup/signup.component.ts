@@ -26,4 +26,11 @@ export class SignupComponent {
     }
   }
 
+  protected onCancel() {
+    this.userData.reset({
+      email: '',
+      password: ''
+    });
+  }
+
 }

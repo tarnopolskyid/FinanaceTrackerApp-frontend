@@ -43,7 +43,7 @@
 
   <div class="flex items-center gap-4 mt-5 justify-end">
     <button class="btn btn-green" [disabled]="userData.invalid">Confirm</button>
-    <button class="btn btn-red">Cancel</button>
+    <button class="btn btn-red" (click)="onCancel()">Cancel</button>
   </div>
 
 </form>
