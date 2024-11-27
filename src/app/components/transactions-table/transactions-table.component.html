@@ -51,7 +51,7 @@
         {{ transaction.amount | currency: 'CZK':'symbol':'1.0-2'  }}
       </td>
       <td>
-        {{ transaction.category?.title ?? 'Other'}}
+        {{ (transaction.category?.title | titlecase) ?? 'Other'}}
       </td>
       <td class="text-center">
         {{ transaction.updatedAt == null ? (transaction.createdAt | date)

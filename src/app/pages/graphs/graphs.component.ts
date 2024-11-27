@@ -101,7 +101,7 @@ export class GraphsComponent implements OnInit {
       datasets: [
         {
           data: Object.values(incomeByCategory),
-          backgroundColor: ['#22C55E','#F97316', '#F59E0B', '#10B981', '#3B82F6', '#6366F1', '#EF4444']
+          backgroundColor: ['#22C55E','#F97316', '#F59E0B', 'rgba(185,16,70,0.95)', '#3B82F6', '#6366F1', '#EF4444']
         }
       ]
     };

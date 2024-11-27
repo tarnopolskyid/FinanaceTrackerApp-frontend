@@ -4,7 +4,6 @@ import { HttpClient } from '@angular/common/http'
 import { ToastrService } from 'ngx-toastr'
 import { tap } from 'rxjs'
 import { CategoryService } from './category.service'
-import { format } from 'date-fns'
 
 @Injectable({
   providedIn: 'root'
@@ -73,18 +72,5 @@ export class TransactionService {
         this.findAll();
         this.toastr.success('Transaction updated');
       })
-
-  }
-
-  getTransactionsPerMonth() {
-    const transactions = this.transactionSig();
-    const transactionsPerMonth = transactions.reduce((acc, transaction) => {
-      const month = format(new Date(transaction.createdAt), 'yyyy-MM');
-      acc[month] = (acc[month] || 0) + 1;
-      return acc;
-    }, {} as Record<string, number>);
-    console.log(transactions)
-    console.log(transactionsPerMonth)
-    return transactionsPerMonth;
   }
 }

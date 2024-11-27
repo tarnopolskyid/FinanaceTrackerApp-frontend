@@ -2,6 +2,7 @@ import { Injectable, signal } from '@angular/core'
 import { HttpClient } from '@angular/common/http'
 import { ToastrService } from 'ngx-toastr'
 import { ICategory } from '../types/category.interface'
+import { catchError } from 'rxjs'
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class CategoryService {
   categoriesSignal = signal<ICategory[]>([])
 
   constructor(private readonly http: HttpClient,
-              private readonly toastr: ToastrService
+              private readonly toastr: ToastrService,
               ) {}
 
   findAll() {
@@ -23,6 +24,12 @@ export class CategoryService {
 
   create(title: string) {
     return this.http.post<ICategory>('categories', {title})
+      .pipe(
+        catchError(err => {
+          this.toastr.error("This category already exist")
+          throw new Error(err.message)
+        })
+      )
       .subscribe((newCategory: ICategory) => {
         this.categoriesSignal.update((categories) =>
           [...categories, newCategory])

@@ -13,7 +13,10 @@ import { format } from 'date-fns'
   styleUrl: './transactions-table.component.scss',
 })
 export class TransactionsTableComponent implements OnInit {
-  @ViewChild('dt', { static: false }) dt: Table | undefined;
+
+  @ViewChild('dt', { static: false })
+  dt: Table | undefined;
+
   @Output()
   editClicked = new EventEmitter<ITransaction>();
 
@@ -37,7 +40,6 @@ export class TransactionsTableComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
     this.cols = [
       { field: 'title', header: 'Title', customExportHeader: 'Product Code' },
       { field: 'amount', header: 'Amount' },

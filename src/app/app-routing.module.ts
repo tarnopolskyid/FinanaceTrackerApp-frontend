@@ -18,8 +18,7 @@ const routes: Routes = [
     path: 'exchange',
     component: ExchangeComponent,
     title: 'Exchange',
-    canActivate: []
-
+    canActivate: [authGuard()]
   },
   {
     path: 'graphs',

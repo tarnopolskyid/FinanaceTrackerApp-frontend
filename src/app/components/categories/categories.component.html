@@ -4,7 +4,7 @@
     <div class="flex flex-wrap items-center gap-2 mb-5">
       <div *ngFor="let category of this.categoryService.categoriesSignal()"
            class="flex py-2 px-8 bg-blue-600 text-xs text-white relative">
-        <p>{{ category.title }}</p>
+        <p>{{ category.title | titlecase }}</p>
 
         <button class="absolute left-2">
           <fa-icon [icon]="editIcon" (click)="edit(category.id, category.title)"/>

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import { catchError } from 'rxjs'
+import { ToastrService } from 'ngx-toastr'
 
 @Component({
   selector: 'app-exchange',
@@ -14,11 +16,12 @@ export class ExchangeComponent implements OnInit {
   convertedAmount: number | null = null;
   targetCurrency: string | null = null; // Přidána proměnná pro cílovou měnu
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,
+              private readonly toastr: ToastrService) {
     this.exchangeForm = new FormGroup({
       currencyFrom: new FormControl('USD'),
       currencyTo: new FormControl('CZK'),
-      amount: new FormControl(0)
+      amount: new FormControl("")
     });
   }
 
@@ -33,10 +36,15 @@ export class ExchangeComponent implements OnInit {
 
   loadCurrencies(): void {
     const apiUrl = 'https://api.exchangerate-api.com/v4/latest/USD';
-    this.http.get(apiUrl, { headers: { 'no-api-prefix': 'true' } }).subscribe((data: any) => {
+    this.http.get(apiUrl, { headers: { 'no-api-prefix': 'true' } })
+      .pipe(
+        catchError(err => {
+          this.toastr.error("Chyba při získávání seznamu měn z API")
+          throw new Error(err.message)
+        })
+      )
+      .subscribe((data: any) => {
       this.currencies = Object.keys(data.rates);
-    }, error => {
-      console.error('Chyba při získávání seznamu měn z API', error);
     });
   }
 
@@ -45,18 +53,18 @@ export class ExchangeComponent implements OnInit {
     const currencyTo = this.exchangeForm.get('currencyTo')?.value;
     const amount = this.exchangeForm.get('amount')?.value;
 
-    if (!currencyFrom || !currencyTo) {
-      console.error('Vyber měny');
-      return;
-    }
-
     const apiUrl = `https://api.exchangerate-api.com/v4/latest/${currencyFrom}`;
-    this.http.get(apiUrl, { headers: { 'no-api-prefix': 'true' } }).subscribe((data: any) => {
+    this.http.get(apiUrl, { headers: { 'no-api-prefix': 'true' } })
+      .pipe(
+        catchError(err => {
+          this.toastr.error("Chyba při získávání dat z API")
+          throw new Error(err.message)
+        })
+      )
+      .subscribe((data: any) => {
       const rate = data.rates[currencyTo];
       this.convertedAmount = amount * rate;
       this.targetCurrency = currencyTo; // Nastavení cílové měny
-    }, error => {
-      console.error('Chyba při získávání dat z API', error);
     });
   }
 }
