@@ -1,0 +1,6 @@
+{
+  "/api": {
+    "target": "https://finanacetrackerapp-production.up.railway.app/",
+    "secure": false
+  }
+}
