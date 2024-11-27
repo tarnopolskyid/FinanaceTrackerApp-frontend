@@ -1,5 +1,7 @@
-<div class="flex justify-center mt-3">
-  <div class="chart-section ml-8">
-    <p-chart type="doughnut" [data]="chartData" [options]="chartOptions"></p-chart>
+<ng-container *ngIf="transactionService.transactionSig().length > 0">
+  <div class="flex justify-center mt-3">
+    <div class="chart-section ml-8">
+      <p-chart type="doughnut" [data]="chartData" [options]="chartOptions"></p-chart>
+    </div>
   </div>
-</div>
+</ng-container>

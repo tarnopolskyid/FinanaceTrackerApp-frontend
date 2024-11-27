@@ -1,20 +1,29 @@
-<div class="flex flex-wrap justify-center gap-20">
-  <div class="text-center">
-    <label class="font-bold" for="totalExpense">Total expense</label>
-    <p-chart id="totalExpense" type="pie" [data]="pieChartDataExpense" [options]="pieChartOptions"></p-chart>
+<ng-container *ngIf="transactionService.transactionSig().length > 0; else noTransactions">
+  <div class="flex flex-wrap justify-center gap-20">
+    <div class="text-center">
+      <label class="font-bold" for="totalExpense">Total expense</label>
+      <p-chart id="totalExpense" type="pie" [data]="pieChartDataExpense" [options]="pieChartOptions"></p-chart>
+    </div>
+    <div class="text-center">
+      <label class="font-bold" for="totalIncome">Total income</label>
+      <p-chart id="totalIncome" type="pie" [data]="pieChartDataIncome" [options]="pieChartOptions"></p-chart>
+    </div>
   </div>
-  <div class="text-center">
-    <label class="font-bold" for="totalIncome">Total income</label>
-    <p-chart id="totalIncome" type="pie" [data]="pieChartDataIncome" [options]="pieChartOptions"></p-chart>
+  <div class="flex flex-wrap justify-center gap-20 mt-12">
+    <div class="text-center">
+      <label class="font-bold" for="byMonth">Stats by month</label>
+      <p-chart id="byMonth" type="bar" [data]="barChartData" [options]="barChartOptions"></p-chart>
+    </div>
+    <div class="text-center">
+      <label class="font-bold" for="transactionsLine">Transactions count by month</label>
+      <p-chart id="transactionsLine" type="line" [data]="lineChartData" [options]="lineChartOptions"></p-chart>
+    </div>
   </div>
-</div>
-<div class="flex flex-wrap justify-center gap-20 mt-12">
-  <div class="text-center">
-    <label class="font-bold" for="byMonth">Stats by month</label>
-    <p-chart id="byMonth" type="bar" [data]="barChartData" [options]="barChartOptions"></p-chart>
+</ng-container>
+<ng-template #noTransactions>
+  <div class="flex justify-center items-center h-64">
+    <p class="text-2xl font-bold text-gray-500 text-center">
+      No transactions found. Please add some to see graphs
+    </p>
   </div>
-  <div class="text-center">
-    <label class="font-bold" for="transactionsLine">Transactions count by month</label>
-    <p-chart id="transactionsLine" type="line" [data]="lineChartData" [options]="lineChartOptions"></p-chart>
-  </div>
-</div>
+</ng-template>

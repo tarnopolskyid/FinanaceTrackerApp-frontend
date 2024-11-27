@@ -4,6 +4,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { CategoryService } from '../../services/category.service'
 import { TransactionService } from '../../services/transaction.service'
 import { MethodEnum } from '../../types/transaction.interface'
+import { distinctUntilChanged, of } from 'rxjs'
 
 @Component({
   selector: 'app-categories',
@@ -50,7 +51,11 @@ export class CategoriesComponent implements OnInit {
 
   private update() {
     this.categoryService.update(this.categoryId, this.categoryForm.value.title);
-    this.transactionService.findAll();
+    of(this.categoryService.categoriesSignal()).pipe(
+      distinctUntilChanged()
+    ).subscribe(() => {
+      this.transactionService.findAll();
+    })
   }
 
   protected edit(id: number, title: string) {

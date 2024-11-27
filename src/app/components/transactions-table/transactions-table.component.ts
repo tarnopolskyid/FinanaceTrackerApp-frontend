@@ -6,6 +6,7 @@ import { RowInput } from 'jspdf-autotable'
 import { Table } from 'primeng/table'
 import { ToastrService } from 'ngx-toastr'
 import { format } from 'date-fns'
+import * as FileSaver from 'file-saver';
 
 @Component({
   selector: 'app-transactions-table',
@@ -124,12 +125,11 @@ export class TransactionsTableComponent implements OnInit {
   }
 
   private saveAsExcelFile(buffer: any, fileName: string): void {
-    import("file-saver").then(FileSaver => {
-      const EXCEL_TYPE = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8";
-      const EXCEL_EXTENSION = ".xlsx";
-      const data: Blob = new Blob([buffer], { type: EXCEL_TYPE });
-      FileSaver.saveAs(data, `${fileName}_export_${new Date().getTime()}${EXCEL_EXTENSION}`);
-    });
+    const EXCEL_TYPE = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8";
+    const EXCEL_EXTENSION = ".xlsx";
+    const data: Blob = new Blob([buffer], { type: EXCEL_TYPE });
+    FileSaver.saveAs(data, `${fileName}_export_${new Date().getTime()}${EXCEL_EXTENSION}`);
   }
+
 
 }
